@@ -1,32 +1,12 @@
+#include "encryptPin.h"
 #include <iostream>
 #include <vector>
 #include <string>
 
-
-std::vector<int> decryptPinDigits( const std::vector<int>& pinDigits ){
-
-    std::vector<int> decryptedPinDigits{};
-
-    for ( size_t i = 0; i < pinDigits.size(); i++ ){
-        decryptedPinDigits.push_back( (pinDigits[i] + 3) % 10 );
-    }
-
-    return decryptedPinDigits;
-
-}
-
-std::vector<int> encryptPinDigits( const std::vector<int>& pinDigits ){
-
-    std::vector<int> encryptedPinDigits{};
-
-    for ( size_t i = 0; i < pinDigits.size(); i++ ){
-        encryptedPinDigits.push_back( (pinDigits[i] + 7) % 10 );
-    }
-
-    return encryptedPinDigits;
-
-}
-
+//  definition for called function combineDigits()
+//  function is type int, returns int value to caller function
+//  function receives 1 const ref to 1 int vector, locally named 'digits'
+//  
 int combineDigits( const std::vector<int>& digits ){
 
     std::string numTemp{ std::to_string(digits[0]) + std::to_string(digits[1]) + std::to_string(digits[2]) + std::to_string(digits[3]) };
@@ -37,6 +17,10 @@ int combineDigits( const std::vector<int>& digits ){
 
 }
 
+//  definition for called function splitDigits()
+//  function is type int vector, returns vector of int values to caller function
+//  function receives 1 const ref to 1 int value, locally named 'num'
+//  
 std::vector<int> splitDigits( const int& num ){
 
     std::vector<int> numDigits{};
@@ -56,10 +40,43 @@ std::vector<int> splitDigits( const int& num ){
 
 }
 
+//  definition for called function decryptPinDigits()
+//  function is type int vector, returns vector of int values to caller function
+//  function receives 1 const ref to 1 int vector, locally named 'encryptedPinDigits'
+//  
+std::vector<int> decryptPinDigits( const std::vector<int>& encryptedPinDigits ){
+
+    std::vector<int> decryptedPinDigits{};
+
+    for ( size_t i = 0; i < encryptedPinDigits.size(); i++ ){
+        decryptedPinDigits.push_back( (encryptedPinDigits[i] + 3) % 10 );
+    }
+
+    return decryptedPinDigits;
+
+}
+
+//  definition for called function encryptPinDigits()
+//  function is type int vector, returns vector of int values to caller function
+//  function receives 1 const ref to 1 int vector, locally named 'pinDigits'
+//  
+std::vector<int> encryptPinDigits( const std::vector<int>& pinDigits ){
+
+    std::vector<int> encryptedPinDigits{};
+
+    for ( size_t i = 0; i < pinDigits.size(); i++ ){
+        encryptedPinDigits.push_back( (pinDigits[i] + 7) % 10 );
+    }
+
+    return encryptedPinDigits;
+
+}
+
 //  definition for called & caller function encryptPin()
 //  function is type int, returns int value to caller function
 //  function receives 1 const reference for int value, locally named 'pin'
 //  function performs all the steps for encrypting 4-digit int value, call this function when encrypting int values
+//  function calls splitDigits(), encryptPinDigits(), & combineDigits()
 //  
 int encryptPin( const int& pin ){
 
@@ -75,6 +92,7 @@ int encryptPin( const int& pin ){
 //  function is type int, returns int value to caller function
 //  function receives 1 const reference for int value, locally named 'pin'
 //  function performs all the steps for encrypting 4-digit int value, call this function when encrypting int values
+//  function calls splitDigits(), decryptPinDigits(), & combineDigits()
 //  
 int decryptPin( const int& encryptedPin ){
 

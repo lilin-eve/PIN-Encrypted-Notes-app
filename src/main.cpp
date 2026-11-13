@@ -1,30 +1,38 @@
 #include <iostream>
 
+
 //  global bool 'programTermination'
 //  when 'programTermination' is false, main() loops, when 'programTermination' is true, main() exits loop & returns 0
 //
 bool programTermination = false;
 
+
 //  declaration for called function printBorderLine()
-//
 void printBorderLine();
 
 //  declaration for called function clearScreen()
-//
 void clearScreen();
 
 //  declaration for called function globalSettings()
+//  function located in file userSettings.cpp
 //  
 void globalSettings();
 
 //  declaration for called function initSystemFiles()
+//  function located in file updateSystemFile.cpp
 //  
 bool initSystemFiles();
 
 //  declaration for called function searchUser()
+//  function located in file searchUser.cpp
+//  
 void searchUser( int promptInput );
 
 
+//  definition for called & caller function menuMain()
+//  function is type int, returns int value to caller function
+//  function calls clearScreen() & printBorderLine()
+//  
 int menuMain(){
     
     int menuInput{};
@@ -53,7 +61,10 @@ int menuMain(){
 
 }
 
-
+//  definition for caller function main()
+//  function is type int, returns int value as program status code
+//  function calls initSystemFiles(), menuMain(), searchUser(), globalSettings(), & printBorderLine()
+//  
 int main(){
 
     if ( initSystemFiles() == true ){
